@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from './LanguageContext';
-import { useAuth } from './AuthContext';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
+import { useAuth } from '../auth/AuthContext';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Badge } from '../ui/badge';
 import { AuctionCard } from './AuctionCard';
 import { mockAuctions, categories } from './mockData';
 import { Search, Timer, Users, Gavel, Star, Filter, Palette, Watch, Car, Laptop, Shirt, Home, Zap, TrendingUp, Clock, Target, Bell } from 'lucide-react';

@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../auth/AuthContext';
 import { useLanguage } from './LanguageContext';
 import { useNotifications } from './NotificationContext';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
   DropdownMenuItem, 
   DropdownMenuSeparator, 
   DropdownMenuTrigger 
-} from './ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Badge } from './ui/badge';
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+} from '../ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Badge } from '../ui/badge';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { 
   Gavel, 
   User, 

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../auth/AuthContext';
 import { useLanguage } from './LanguageContext';
 import { useNotifications } from './NotificationContext';
-import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
-import { Label } from './ui/label';
-import { Input } from './ui/input';
-import { Badge } from './ui/badge';
-import { Separator } from './ui/separator';
-import { Progress } from './ui/progress';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
+import { Badge } from '../ui/badge';
+import { Separator } from '../ui/separator';
+import { Progress } from '../ui/progress';
 import { mockAuctions } from './mockData';
 import { 
   CreditCard, 
