@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { AuctionCard } from './AuctionCard';
 import { mockAuctions, categories } from './mockData';
-import { Search, Timer, Users, Gavel, Star, Filter, Palette, Watch, Car, Laptop, Shirt, Home, Zap, TrendingUp, Clock, Target, Bell } from 'lucide-react';
+import { Search, Timer, Users, Gavel, Star, Filter, Palette, Watch, Car, Laptop, Shirt, Home, Zap, TrendingUp, Clock, Target } from 'lucide-react';
 
 export function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -366,43 +366,6 @@ export function HomePage() {
               </div>
               <span className="text-sm">Daily Auctions</span>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Test Guide */}
-      <section className="py-12 bg-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white rounded-xl p-8 shadow-lg">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                <Bell className="w-6 h-6 text-blue-600" />
-              </div>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Test Notifications & Features</h3>
-            <p className="text-gray-600 mb-6">
-              To test the notification system and other features, login with any of these demo accounts:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="font-medium text-sm">Admin Account</p>
-                <p className="text-xs text-gray-600">admin@auction.com</p>
-                <p className="text-xs text-blue-600">Password: password</p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="font-medium text-sm">Seller Account</p>
-                <p className="text-xs text-gray-600">seller@test.com</p>
-                <p className="text-xs text-blue-600">Password: password</p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="font-medium text-sm">Buyer Account</p>
-                <p className="text-xs text-gray-600">buyer@test.com</p>
-                <p className="text-xs text-blue-600">Password: password</p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-500">
-              After logging in, click the bell icon (🔔) in the header to see notifications and test the dropdown functionality.
-            </p>
           </div>
         </div>
       </section>

@@ -1,23 +1,24 @@
-import React from 'react';
+"use client";
 
-// Simple toast notification component
-interface ToasterProps {
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-}
+import { useTheme } from "next-themes@0.4.6";
+import { Toaster as Sonner, ToasterProps } from "sonner@2.0.3";
 
-const Toaster = ({ position = 'top-right' }: ToasterProps) => {
+const Toaster = ({ ...props }: ToasterProps) => {
+  const { theme = "system" } = useTheme();
+
   return (
-    <div 
-      id="toaster-container" 
-      className={`fixed z-50 pointer-events-none ${
-        position === 'top-right' ? 'top-4 right-4' :
-        position === 'top-left' ? 'top-4 left-4' :
-        position === 'bottom-right' ? 'bottom-4 right-4' :
-        'bottom-4 left-4'
-      }`}
-    >
-      {/* Simple toast container - notifications would be injected here */}
-    </div>
+    <Sonner
+      theme={theme as ToasterProps["theme"]}
+      className="toaster group"
+      style={
+        {
+          "--normal-bg": "var(--popover)",
+          "--normal-text": "var(--popover-foreground)",
+          "--normal-border": "var(--border)",
+        } as React.CSSProperties
+      }
+      {...props}
+    />
   );
 };
 

@@ -174,7 +174,7 @@ export function AuctionDetails() {
                     variant="outline"
                     size="sm"
                     onClick={handleWatchlist}
-                    className={`btn-outline-slate ${isWatching ? 'border-red-400 text-red-600 hover:bg-red-500 hover:text-white hover:border-red-500' : ''}`}
+                    className={`btn-outline-slate ${isWatching ? 'text-red-600 border-red-200 hover:bg-red-50 hover:border-red-300' : ''}`}
                   >
                     <Heart size={16} className={isWatching ? 'fill-current' : ''} />
                   </Button>

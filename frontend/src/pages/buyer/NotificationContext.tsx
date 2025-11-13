@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { toast } from 'sonner@2.0.3';
 
 interface Notification {
   id: string;
@@ -58,8 +59,8 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
 
     setNotifications(prev => [newNotification, ...prev]);
     
-    // Simple notification log instead of toast
-    console.log('📣 New notification:', notificationData.message);
+    // Show toast notification
+    toast.info(notificationData.message);
   };
 
   const markAsRead = (id: string) => {
@@ -73,9 +74,16 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   const showToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
-    // Simple console logging instead of toast
-    const emoji = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
-    console.log(`${emoji} ${message}`);
+    switch (type) {
+      case 'success':
+        toast.success(message);
+        break;
+      case 'error':
+        toast.error(message);
+        break;
+      default:
+        toast.info(message);
+    }
   };
 
   return (

@@ -1,102 +1,75 @@
+"use client";
+
 import * as React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react@0.487.0";
+import { DayPicker } from "react-day-picker@8.10.1";
 
-interface CalendarProps {
-  className?: string;
-  selected?: Date;
-  onSelect?: (date: Date | undefined) => void;
-  disabled?: (date: Date) => boolean;
-  mode?: 'single' | 'multiple';
-}
+import { cn } from "./utils";
+import { buttonVariants } from "./button";
 
-const Calendar = ({ className = '', selected, onSelect, disabled, mode = 'single' }: CalendarProps) => {
-  const [currentMonth, setCurrentMonth] = React.useState(new Date());
-
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  };
-
-  const navigateMonth = (direction: 'prev' | 'next') => {
-    setCurrentMonth(prev => {
-      const newMonth = new Date(prev);
-      if (direction === 'prev') {
-        newMonth.setMonth(prev.getMonth() - 1);
-      } else {
-        newMonth.setMonth(prev.getMonth() + 1);
-      }
-      return newMonth;
-    });
-  };
-
-  const handleDateClick = (day: number) => {
-    const clickedDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
-    if (disabled && disabled(clickedDate)) return;
-    if (onSelect) onSelect(clickedDate);
-  };
-
-  const isSelected = (day: number) => {
-    if (!selected) return false;
-    const dayDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
-    return dayDate.toDateString() === selected.toDateString();
-  };
-
-  const daysInMonth = getDaysInMonth(currentMonth);
-  const firstDay = getFirstDayOfMonth(currentMonth);
-  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  const emptyDays = Array.from({ length: firstDay }, (_, i) => i);
-
+function Calendar({
+  className,
+  classNames,
+  showOutsideDays = true,
+  ...props
+}: React.ComponentProps<typeof DayPicker>) {
   return (
-    <div className={`p-3 ${className}`}>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <button
-          onClick={() => navigateMonth('prev')}
-          className="p-1 hover:bg-accent rounded"
-        >
-          ←
-        </button>
-        <h2 className="font-semibold">
-          {currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-        </h2>
-        <button
-          onClick={() => navigateMonth('next')}
-          className="p-1 hover:bg-accent rounded"
-        >
-          →
-        </button>
-      </div>
-
-      {/* Days of week */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-          <div key={day} className="text-center text-sm font-medium p-2">
-            {day}
-          </div>
-        ))}
-      </div>
-
-      {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1">
-        {emptyDays.map(i => (
-          <div key={`empty-${i}`} className="p-2" />
-        ))}
-        {days.map(day => (
-          <button
-            key={day}
-            onClick={() => handleDateClick(day)}
-            className={`p-2 text-center text-sm rounded hover:bg-accent ${
-              isSelected(day) ? 'bg-primary text-primary-foreground' : ''
-            }`}
-          >
-            {day}
-          </button>
-        ))}
-      </div>
-    </div>
+    <DayPicker
+      showOutsideDays={showOutsideDays}
+      className={cn("p-3", className)}
+      classNames={{
+        months: "flex flex-col sm:flex-row gap-2",
+        month: "flex flex-col gap-4",
+        caption: "flex justify-center pt-1 relative items-center w-full",
+        caption_label: "text-sm font-medium",
+        nav: "flex items-center gap-1",
+        nav_button: cn(
+          buttonVariants({ variant: "outline" }),
+          "size-7 bg-transparent p-0 opacity-50 hover:opacity-100",
+        ),
+        nav_button_previous: "absolute left-1",
+        nav_button_next: "absolute right-1",
+        table: "w-full border-collapse space-x-1",
+        head_row: "flex",
+        head_cell:
+          "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
+        row: "flex w-full mt-2",
+        cell: cn(
+          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent [&:has([aria-selected].day-range-end)]:rounded-r-md",
+          props.mode === "range"
+            ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
+            : "[&:has([aria-selected])]:rounded-md",
+        ),
+        day: cn(
+          buttonVariants({ variant: "ghost" }),
+          "size-8 p-0 font-normal aria-selected:opacity-100",
+        ),
+        day_range_start:
+          "day-range-start aria-selected:bg-primary aria-selected:text-primary-foreground",
+        day_range_end:
+          "day-range-end aria-selected:bg-primary aria-selected:text-primary-foreground",
+        day_selected:
+          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+        day_today: "bg-accent text-accent-foreground",
+        day_outside:
+          "day-outside text-muted-foreground aria-selected:text-muted-foreground",
+        day_disabled: "text-muted-foreground opacity-50",
+        day_range_middle:
+          "aria-selected:bg-accent aria-selected:text-accent-foreground",
+        day_hidden: "invisible",
+        ...classNames,
+      }}
+      components={{
+        IconLeft: ({ className, ...props }) => (
+          <ChevronLeft className={cn("size-4", className)} {...props} />
+        ),
+        IconRight: ({ className, ...props }) => (
+          <ChevronRight className={cn("size-4", className)} {...props} />
+        ),
+      }}
+      {...props}
+    />
   );
-};
+}
 
 export { Calendar };

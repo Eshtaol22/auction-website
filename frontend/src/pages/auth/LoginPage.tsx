@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
-import { useLanguage } from '../buyer/LanguageContext';
-import { useNotifications } from '../buyer/NotificationContext';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
+import { useLanguage } from './LanguageContext';
+import { useNotifications } from './NotificationContext';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Gavel } from 'lucide-react';
 
 export function LoginPage() {

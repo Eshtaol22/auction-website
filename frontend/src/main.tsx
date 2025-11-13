@@ -1,10 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import './App.css';
+import './index.css';
+import { HomePage } from './pages/buyer/HomePage';
+import { LanguageProvider } from './pages/buyer/LanguageContext';
+import { AuthProvider } from './pages/auth/AuthContext';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+  <React.StrictMode>
+    <BrowserRouter>
+      <LanguageProvider>
+        <AuthProvider>
+          <HomePage />
+        </AuthProvider>
+      </LanguageProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
