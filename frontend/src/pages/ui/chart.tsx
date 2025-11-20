@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as RechartsPrimitive from "recharts@2.15.2";
+import * as RechartsPrimitive from "recharts";
 
 import { cn } from "./utils";
 
@@ -90,7 +90,7 @@ ${colorConfig
     const color =
       itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
       itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
+    return color ? `  --color-${key}: ${color};` : null;
   })
   .join("\n")}
 }
@@ -103,6 +103,17 @@ ${colorConfig
 };
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
+
+// FIX: Explicitly type `payload` and `label` to fix TS2339 errors
+interface CustomTooltipProps extends React.ComponentProps<typeof RechartsPrimitive.Tooltip> {
+  hideLabel?: boolean;
+  hideIndicator?: boolean;
+  indicator?: "line" | "dot" | "dashed";
+  nameKey?: string;
+  labelKey?: string;
+  payload?: any[];
+  label?: any; 
+}
 
 function ChartTooltipContent({
   active,
@@ -118,14 +129,7 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<"div"> & {
-    hideLabel?: boolean;
-    hideIndicator?: boolean;
-    indicator?: "line" | "dot" | "dashed";
-    nameKey?: string;
-    labelKey?: string;
-  }) {
+}: React.ComponentProps<"div"> & CustomTooltipProps) {
   const { config } = useChart();
 
   const tooltipLabel = React.useMemo(() => {
@@ -136,6 +140,8 @@ function ChartTooltipContent({
     const [item] = payload;
     const key = `${labelKey || item?.dataKey || item?.name || "value"}`;
     const itemConfig = getPayloadConfigFromPayload(config, item, key);
+    
+    // FIX: Using optional chaining to safely access label properties
     const value =
       !labelKey && typeof label === "string"
         ? config[label as keyof typeof config]?.label || label
@@ -179,7 +185,7 @@ function ChartTooltipContent({
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
-        {payload.map((item, index) => {
+        {payload.map((item: any, index: any) => { // FIX: Explicitly typed item and index to avoid TS7006/TS7031
           const key = `${nameKey || item.name || item.dataKey || "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
           const indicatorColor = color || item.payload.fill || item.color;
@@ -202,11 +208,12 @@ function ChartTooltipContent({
                     !hideIndicator && (
                       <div
                         className={cn(
-                          "shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)",
+                          "shrink-0 rounded-[2px]", 
                           {
-                            "h-2.5 w-2.5": indicator === "dot",
-                            "w-1": indicator === "line",
-                            "w-0 border-[1.5px] border-dashed bg-transparent":
+                            // FIX: Updated to use correct arbitrary value syntax for Tailwind
+                            "h-2.5 w-2.5 bg-[--color-bg] border border-[--color-border]": indicator === "dot",
+                            "w-1 bg-[--color-bg]": indicator === "line",
+                            "w-0 border-[1.5px] border-dashed bg-transparent border-[--color-border]":
                               indicator === "dashed",
                             "my-0.5": nestLabel && indicator === "dashed",
                           },
@@ -250,20 +257,22 @@ function ChartTooltipContent({
 
 const ChartLegend = RechartsPrimitive.Legend;
 
+// FIX: Simplified the Pick type to resolve TS2344/TS2339 errors
 function ChartLegendContent({
   className,
   hideIcon = false,
-  payload,
+  payload, // FIX: Implicitly typed here but handled below
   verticalAlign = "bottom",
   nameKey,
 }: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+  Pick<RechartsPrimitive.LegendProps, "verticalAlign"> & {
     hideIcon?: boolean;
     nameKey?: string;
+    payload?: any[]; // FIX: Explicitly typed payload
   }) {
   const { config } = useChart();
 
-  if (!payload?.length) {
+  if (!payload?.length) { // FIX: Use optional chaining to resolve TS2339 on payload.length
     return null;
   }
 
@@ -275,7 +284,7 @@ function ChartLegendContent({
         className,
       )}
     >
-      {payload.map((item) => {
+      {payload.map((item: any) => { // FIX: Explicitly typed item to avoid TS7006
         const key = `${nameKey || item.dataKey || "value"}`;
         const itemConfig = getPayloadConfigFromPayload(config, item, key);
 

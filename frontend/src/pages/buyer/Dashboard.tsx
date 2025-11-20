@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react'; // Retain React import
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { useLanguage } from './LanguageContext';
@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Badge } from '../ui/badge';
 import { AuctionCard } from './AuctionCard';
-import { mockAuctions, Bid } from './mockData';
+// FIX: Changed 'Bid' to type-only import to resolve TS1484
+import { mockAuctions, type Bid } from './mockData'; 
 import { 
   PlusCircle, 
   Gavel, 
@@ -19,7 +20,7 @@ import {
   Edit,
   Trash2,
   Star,
-  Users
+  // FIX: Removed unused import 'Users' (TS6133)
 } from 'lucide-react';
 
 export function Dashboard() {
