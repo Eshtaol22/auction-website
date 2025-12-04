@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import { useLanguage } from '../buyer/LanguageContext';
-import { useNotifications } from '../buyer/NotificationContext';
+import { useNotifications } from '../buyer//NotificationContext';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -45,7 +45,7 @@ export function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="w-full max-w-md space-y-6">
         {/* Logo and Title */}
         <div className="text-center">
@@ -87,6 +87,12 @@ export function LoginPage() {
                   placeholder="Enter your password"
                   required
                 />
+              </div>
+
+              <div className="flex items-center justify-end">
+                <Link to="/forgot-password" className="text-sm text-blue-600 hover:underline">
+                  Forgot password?
+                </Link>
               </div>
 
               <Button type="submit" className="w-full" disabled={isLoading}>

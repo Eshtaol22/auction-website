@@ -21,6 +21,14 @@ import { WalletPage } from './pages/buyer/WalletPage';
 import { BidPlacementPage } from './pages/buyer/BidPlacementPage';
 import { TermsPage } from './pages/buyer/TermsPage';
 import { NotificationsPage } from './pages/buyer/NotificationsPage';
+import { ForgotPasswordPage } from './pages/auth/ForgotPasswordPage';
+import { OTPVerificationPage } from './pages/auth/OTPVerificationPage';
+import { ResetPasswordPage } from './pages/auth/ResetPasswordPage';
+
+
+
+
+
 
 import './index.css';
 
@@ -47,6 +55,9 @@ function App() {
             <Route path="/bid/:id" element={<BidPlacementPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/verify-otp" element={<OTPVerificationPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
