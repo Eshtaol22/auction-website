@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { HomePage } from './pages/buyer/HomePage';
+import App from './App';
 import { LanguageProvider } from './pages/buyer/LanguageContext';
 import { AuthProvider } from './pages/auth/AuthContext';
 
@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <LanguageProvider>
         <AuthProvider>
-          <HomePage />
+          <App />     
         </AuthProvider>
       </LanguageProvider>
     </BrowserRouter>

@@ -1,3 +1,4 @@
+//frontend/src/pages/buyer/Header.tsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
@@ -90,11 +91,11 @@ export function Header() {
         <div className="flex items-center justify-between h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="p-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+            <div className="p-2 bg-linear-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
               <Gavel className="h-6 w-6 text-white" />
             </div>
             <div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-linear-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
                 EthAuction
               </span>
               <div className="text-xs text-slate-500 -mt-1">Premium Marketplace</div>
@@ -130,7 +131,7 @@ export function Header() {
                       <Bell size={18} />
                       {unreadCount > 0 && (
                         <Badge 
-                          className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg animate-pulse"
+                          className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 flex items-center justify-center text-xs bg-linear-to-r from-indigo-500 to-indigo-600 text-white shadow-lg animate-pulse"
                         >
                           {unreadCount > 9 ? '9+' : unreadCount}
                         </Badge>
@@ -173,7 +174,7 @@ export function Header() {
                               <div className="flex items-start justify-between">
                                 <p className="text-sm pr-2 flex-1">{notification.message}</p>
                                 {!notification.read && (
-                                  <div className="w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0 mt-1"></div>
+                                  <div className="w-2 h-2 bg-indigo-500 rounded-full shrink-0 mt-1"></div>
                                 )}
                               </div>
                               <div className="flex items-center justify-between">
@@ -212,7 +213,7 @@ export function Header() {
                     <Button variant="ghost" className="flex items-center space-x-3 p-2 rounded-xl hover:bg-slate-50 transition-all duration-200">
                       <Avatar className="h-10 w-10 ring-2 ring-slate-100 shadow-md">
                         <AvatarImage src={user?.profilePicture} />
-                        <AvatarFallback className="bg-gradient-to-br from-slate-600 to-slate-700 text-white font-semibold">
+                        <AvatarFallback className="bg-linear-to-br from-slate-600 to-slate-700 text-white font-semibold">
                           {getInitials(user?.firstName || '', user?.lastName || '')}
                         </AvatarFallback>
                       </Avatar>
@@ -256,7 +257,7 @@ export function Header() {
                 <Button variant="outline" className="bg-white border-slate-200 hover:bg-slate-50 rounded-xl px-6 py-2 font-medium" asChild>
                   <Link to="/login">{t('nav.login')}</Link>
                 </Button>
-                <Button className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-xl px-6 py-2 font-medium shadow-lg" asChild>
+                <Button className="bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-xl px-6 py-2 font-medium shadow-lg" asChild>
                   <Link to="/register">{t('nav.register')}</Link>
                 </Button>
               </div>

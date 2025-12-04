@@ -31,8 +31,8 @@ import { toast } from 'sonner';
 export function WalletPage() {
   const { auctionId } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
-  const { user } = useAuth();
+  useLanguage();
+  useAuth();
   
   const [fundingAmount, setFundingAmount] = useState('');
   const [selectedMethod, setSelectedMethod] = useState('telebirr');
@@ -123,7 +123,7 @@ export function WalletPage() {
       <div className="min-h-screen modern-pattern flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-8 pb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-blue-600 text-white mb-6 mx-auto">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-linear-to-br from-indigo-600 to-blue-600 text-white mb-6 mx-auto">
               <CheckCircle className="h-8 w-8" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-4">Payment Successful!</h2>
@@ -323,7 +323,7 @@ export function WalletPage() {
                 <Button 
                   onClick={handleFunding}
                   disabled={isProcessing || !fundingAmount || !phoneNumber || !pin}
-                  className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 btn-primary-enhanced btn-hover-scale"
+                  className="w-full bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 btn-primary-enhanced btn-hover-scale"
                   size="lg"
                 >
                   {isProcessing ? (
